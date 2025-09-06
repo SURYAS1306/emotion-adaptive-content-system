@@ -1,14 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "routes": [
     {
       "src": "/(.*)",
@@ -16,6 +8,6 @@
     }
   ],
   "env": {
-    "VITE_API_BASE": "https://your-backend-url.vercel.app"
+    "VITE_API_BASE": ""
   }
 }
