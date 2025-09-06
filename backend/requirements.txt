@@ -1,0 +1,17 @@
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+pydantic==2.9.2
+pillow==11.0.0
+numpy==1.24.3
+# OpenCV for computer vision
+opencv-python-headless==4.10.0.84
+# Deep learning stack - using compatible versions
+tensorflow==2.14.0
+keras==2.14.0
+# DeepFace for emotion detection
+deepface==0.0.93
+# Text sentiment
+textblob==0.18.0.post0
+# Additional ML libraries
+scikit-learn==1.3.2
+scipy==1.11.4

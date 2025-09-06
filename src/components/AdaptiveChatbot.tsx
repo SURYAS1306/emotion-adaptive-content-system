@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Bot, User, Heart, Lightbulb, Shield, Zap } from "lucide-react";
 import { Emotion } from "./EmotionDetector";
 import Sentiment from "sentiment";
+import { analyzeSentimentApi, type SentimentLabel } from "@/lib/api";
 
 interface Message {
   id: string;
@@ -94,11 +95,16 @@ export const AdaptiveChatbot = ({ currentEmotion }: AdaptiveChatbotProps) => {
     ]);
   }, [currentEmotion]);
 
-  const analyzeSentiment = (text: string): 'positive' | 'negative' | 'neutral' => {
-    const result = sentiment.analyze(text);
-    if (result.score > 0) return 'positive';
-    if (result.score < 0) return 'negative';
-    return 'neutral';
+  const analyzeSentiment = async (text: string): Promise<SentimentLabel> => {
+    try {
+      const res = await analyzeSentimentApi(text);
+      return res.label;
+    } catch {
+      const result = sentiment.analyze(text);
+      if (result.score > 0) return 'positive';
+      if (result.score < 0) return 'negative';
+      return 'neutral';
+    }
   };
 
   const generateResponse = (userMessage: string, userSentiment: 'positive' | 'negative' | 'neutral'): string => {
@@ -121,7 +127,7 @@ export const AdaptiveChatbot = ({ currentEmotion }: AdaptiveChatbotProps) => {
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
-    const userSentiment = analyzeSentiment(inputValue);
+    const userSentiment = await analyzeSentiment(inputValue);
     
     const userMessage: Message = {
       id: Date.now().toString(),

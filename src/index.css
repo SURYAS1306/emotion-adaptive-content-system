@@ -182,6 +182,19 @@
     transition: var(--transition-emotion);
   }
 
+  /* Friendly glass and gradient helpers */
+  .glass-panel {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-neutral);
+  }
+  .gradient-neutral { background-image: var(--gradient-neutral); }
+  .gradient-happy { background-image: var(--gradient-happy); }
+  .gradient-sad { background-image: var(--gradient-sad); }
+  .gradient-angry { background-image: var(--gradient-angry); }
+  .gradient-surprised { background-image: var(--gradient-surprised); }
+  .gradient-fearful { background-image: var(--gradient-fearful); }
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
